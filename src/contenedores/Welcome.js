@@ -137,6 +137,7 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   margin-top: 20%;
+  cursor: pointer;
   @media (min-width: ${minWidth}) {
     font-size: 25px;
     height: 60px;
@@ -163,7 +164,7 @@ const Welcome = ({name}) => {
         </WrapperImage>
         <Wrapper>
           <Title>
-            ¡Bienvenido {name}!
+            ¡Bienvenido/a {name}!
           </Title>
           <SubTitle>
             No tienes registros
