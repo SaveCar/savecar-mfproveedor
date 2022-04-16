@@ -4,7 +4,7 @@
     "jsx": "react-jsx",
     "declarationDir": "dist"
   },
-  "files": ["src/savecar-mfbienvenida.tsx"],
+  "files": ["src/savecar-mfproveedor.tsx"],
   "include": ["src/**/*"],
   "exclude": ["src/**/*.test*"]
 }

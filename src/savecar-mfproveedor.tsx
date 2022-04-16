@@ -10,7 +10,7 @@ export function mount(props) {
 export function unmount(props) {
   const to = localStorage.getItem("toMf");
   localStorage.removeItem("toMf");
-  props.go_to_mf("mfregusuario", to, "/");
+  props.go_to_mf("mfproveedor", to, "/");
 
   return lifecycles.unmount(props);
 }
