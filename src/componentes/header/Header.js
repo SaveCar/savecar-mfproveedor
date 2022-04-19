@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { rem } from "polished";
-import icon_on_back from "./../../icon/back.svg";
+import menu from "./../../icon/menu.svg";
 import icon_save_car from "./../../icon/logo.svg";
 
 const minWidth = rem("640px");
@@ -75,7 +75,7 @@ const Header = () => {
   return (
     <>
       <Wrapper>
-        <LogoOnBack src={icon_on_back}></LogoOnBack>
+        <LogoOnBack src={menu}></LogoOnBack>
         <WrapperTitle>
           <LogoSaveCar src={icon_save_car}/>
           <Title>SaveCar</Title>
