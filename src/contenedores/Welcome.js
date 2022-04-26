@@ -3,6 +3,7 @@ import { rem } from "polished";
 import Header from "../componentes/header/Header.js";
 import create from "../icon/create.png";
 
+
 const minWidth = rem("640px");
 const maxWidth = rem("1200px");
 
@@ -23,7 +24,6 @@ export const WrapperHeader = styled.div`
   }
   @media (min-width: ${maxWidth}) {
     padding: 0px 15%;
-    height: 20vh;
   }
 `;
 
@@ -126,23 +126,18 @@ const Button = styled.button`
   border-radius: 100px;
   font-weight: 600;
   font-family: rubik;
-  border:none;
   height: 50px;
   font-size: 18px;
-  width: 70%;
+  width: 80%;
   background: #F6EBCF;
   color: #304562;
   border: 1px solid #CBBBA1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20%;
+  margin-top: 20%;  
   cursor: pointer;
   @media (min-width: ${minWidth}) {
     font-size: 25px;
     height: 60px;
     margin-top: 15%;
-    padding: 4%;
   }
   @media (min-width: ${maxWidth}) {
     font-size: 30px;
@@ -152,7 +147,7 @@ const Button = styled.button`
 `;
 
 
-const Welcome = ({name}) => {
+const Welcome = ({name, onContinue}) => {
   return (
     <>
       <WrapperHeader>
@@ -172,7 +167,9 @@ const Welcome = ({name}) => {
           <Text>
           Esperamos poder ayudarte a darle uso a tus espacios
           </Text>
-          <Button>
+          <Button
+            onClick={() => onContinue()}
+          >
             REGISTRAR
           </Button>
         </Wrapper>
