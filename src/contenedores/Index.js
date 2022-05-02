@@ -10,9 +10,10 @@ import { ObtenerComunas, ObtenerServicios, ObtenerTipoCobro, ObtenerTipoSuelo, O
 const Index = () => {
 
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')));
-  const [name, setName] = useState(userData.data.nombreUsuario.charAt(0) + userData.data.nombreUsuario.slice(1).toLowerCase());
+  const [name, setName] = useState(userData.data.nombreUsuario.split(" ")[0].charAt(0) + userData.data.nombreUsuario.split(" ")[0].slice(1).toLowerCase());
 
   useEffect(() => {
+      
     ObtenerTipoVehiculo()
       .then((res) => {
         localStorage.setItem('ListaTipoVehiculos', JSON.stringify(res.data));
@@ -69,13 +70,9 @@ const Index = () => {
   }
 
 
-  return ( <
-    Welcome name = {
-      name
-    }
-    onContinue = {
-      onContinue
-    }
+  return ( 
+    <Welcome name = { name }
+      onContinue = { onContinue }
     />
   );
 };
