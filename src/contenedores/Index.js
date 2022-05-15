@@ -81,6 +81,9 @@ const WrapperButton = styled.div`
     width: 89.5%;
   }
   @media (min-width: ${minWidth2}) {
+    width: 84.5%;
+  }
+  @media (min-width: ${minWidth3}) {
     width: 79.5%;
   }
   @media (min-width: ${maxWidth}) {

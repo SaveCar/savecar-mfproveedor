@@ -103,3 +103,14 @@ export const ObtenerTodasReservasAceptadasEspacio = (idEspacio) => {
 } 
 
 
+export const DesactivarEspacio = (idEspacio) => {
+  return axios.put(
+    `http://127.0.0.1:8000/api/actualizar/desactivar-espacio/${idEspacio}`, 
+    {
+      headers,
+    }
+  )
+} 
+
+
+

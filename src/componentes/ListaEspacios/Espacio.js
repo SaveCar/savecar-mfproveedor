@@ -1,16 +1,35 @@
 import * as Styles from "./Styles.js";
-import { ObtenerTodasReservasAceptadasEspacio, ObtenerTodasSolicitudesEspacio } from "../../servicios/servicio";
+import { DesactivarEspacio, ObtenerTodasReservasAceptadasEspacio, ObtenerTodasSolicitudesEspacio } from "../../servicios/servicio";
 import { useEffect, useState } from "react";
+import * as singleSpa from "single-spa";
 
-export const Espacio = ({direccion,tipo, capacidad, idEspacio, idEstado, tipoCobro, imagen, precioEspacio,espacio, onContinue}) => {
+
+export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoCobro, imagen, precioEspacio,espacio, onContinue}) => {
     const [solicitudes, setSolicitudes] = useState(null)
     const [reservas, setReservas] = useState(null)
 
-    const handleContinue = (data) => {  
+    const handleContinue = () => {  
         localStorage.setItem('espacioSeleccionado', JSON.stringify(espacio))
         onContinue() 
     }
 
+    const unmountApplication = (toMf) => {
+        localStorage.setItem("toMf", toMf);
+        singleSpa.unregisterApplication("@savecar/mfproveedor").then(() => {
+            console.log("redireccionando");
+        });
+    };
+
+    const handleDisabled = (data) => {
+        DesactivarEspacio(data)
+            .then((res) => {
+                //reload mfproveedor
+                unmountApplication('mfproveedor')
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
 
     useEffect(() => {
         ObtenerTodasSolicitudesEspacio(espacio.idEspacio)
@@ -69,6 +88,15 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, idEstado, tipoCob
                                     {capacidad }                
                                 </Styles.Text>
                             </Styles.WrapperInline>
+
+                            <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
+                                <Styles.Text style={{'fontWeight':'400'}}>
+                                    Disponible: 
+                                </Styles.Text>
+                                <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
+                                    {disponible }                
+                                </Styles.Text>
+                            </Styles.WrapperInline>
                           
                         </Styles.WrapperDiv>
                     </Styles.WrapperInline>
@@ -114,6 +142,7 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, idEstado, tipoCob
                             <Styles.DivBanner>
                                 <Styles.ButtonBanner
                                     style={{'background':'#F8F5F0', 'border':' 1px solid #E8CBCB', 'color':'#9E2C2C'}}
+                                    onClick={() => handleDisabled(idEspacio)}
                                 > 
                                     Desactivar 
                                 </Styles.ButtonBanner>    

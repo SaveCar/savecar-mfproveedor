@@ -17,7 +17,6 @@ export const ListaEspacios = ({listaEspacios, onContinue}) => {
     const [espacios, setEspacios] = useState(listaEspacios);
     var listaEspaciosDisponibles = []
     
-
     if (espacios !== null) {
         espacios.map((data, key) => {
             
@@ -31,6 +30,7 @@ export const ListaEspacios = ({listaEspacios, onContinue}) => {
                     precioEspacio={data.precio}
                     imagen={data.imagenEspacio}
                     espacio={data}
+                    disponible={data.disponible}
                     key={key}
                     onContinue={onContinue}
                 />
