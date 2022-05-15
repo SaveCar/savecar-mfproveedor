@@ -10,7 +10,8 @@ const headers = {
 
 export const Obtenerusuario = (correo, clave) => {
   return axios.get(
-    `http://127.0.0.1:8000/api/obtener/usuario/correo=${correo}clave=${clave}`, {
+    `http://127.0.0.1:8000/api/obtener/usuario/correo=${correo}clave=${clave}`, 
+    {
       headers,
     }
   )
@@ -18,7 +19,8 @@ export const Obtenerusuario = (correo, clave) => {
 
 export const ObtenerTipoVehiculo = () => {
   return axios.get(
-    `http://127.0.0.1:8000/api/obtener/tipo-vehiculo`, {
+    `http://127.0.0.1:8000/api/obtener/tipo-vehiculo`, 
+    {
       headers,
     }
   )
@@ -27,7 +29,8 @@ export const ObtenerTipoVehiculo = () => {
 
 export const ObtenerVehiculo = () => {
   return axios.get(
-    `http://127.0.0.1:8000/api/obtener/vehiculo`, {
+    `http://127.0.0.1:8000/api/obtener/vehiculo`, 
+    {
       headers,
     }
   )
@@ -35,7 +38,8 @@ export const ObtenerVehiculo = () => {
 
 export const ObtenerServicios = () => {
   return axios.get(
-    `http://127.0.0.1:8000/api/obtener/servicio`, {
+    `http://127.0.0.1:8000/api/obtener/servicio`, 
+    {
       headers,
     }
   )
@@ -43,7 +47,8 @@ export const ObtenerServicios = () => {
 
 export const ObtenerComunas = () => {
   return axios.get(
-    `http://127.0.0.1:8000/api/obtener/comuna`, {
+    `http://127.0.0.1:8000/api/obtener/comuna`, 
+    {
       headers,
     }
   )
@@ -51,7 +56,8 @@ export const ObtenerComunas = () => {
 
 export const ObtenerTipoCobro = () => {
   return axios.get(
-    `http://127.0.0.1:8000/api/obtener/tipo-cobro`, {
+    `http://127.0.0.1:8000/api/obtener/tipo-cobro`, 
+    {
       headers,
     }
   )
@@ -59,8 +65,41 @@ export const ObtenerTipoCobro = () => {
 
 export const ObtenerTipoSuelo = () => {
   return axios.get(
-    `http://127.0.0.1:8000/api/obtener/tipo-suelo`, {
+    `http://127.0.0.1:8000/api/obtener/tipo-suelo`,
+    {
       headers,
     }
   )
 }
+
+
+export const ObtenerTodosEspaciosRegistrados = (idUsuario) => {
+  return axios.get(
+    `http://127.0.0.1:8000/api/obtener/espacios/${idUsuario}`, 
+    {
+      headers,
+    }
+  )
+}
+
+
+export const ObtenerTodasSolicitudesEspacio = (idEspacio) => {
+  return axios.get(
+    `http://127.0.0.1:8000/api/obtener/solicitud-reserva/${idEspacio}`, 
+    {
+      headers,
+    }
+  )
+} 
+
+
+export const ObtenerTodasReservasAceptadasEspacio = (idEspacio) => {
+  return axios.get(
+    `http://127.0.0.1:8000/api/obtener/reserva-espacio/${idEspacio}`, 
+    {
+      headers,
+    }
+  )
+} 
+
+
