@@ -103,7 +103,7 @@ export const ObtenerTodasReservasAceptadasEspacio = (idEspacio) => {
 } 
 
 
-export const DesactivarEspacio = (idEspacio) => {
+export const DesactivarEspacioByIdEspacio = (idEspacio) => {
   return axios.put(
     `http://127.0.0.1:8000/api/actualizar/desactivar-espacio/${idEspacio}`, 
     {
@@ -112,5 +112,20 @@ export const DesactivarEspacio = (idEspacio) => {
   )
 } 
 
+export const ActualizarEspacioDisponibleEspacio = (idEspacio, numReserva) => {
+  return axios.put(
+    `http://127.0.0.1:8000/api/actualizar/datos-espacio/${idEspacio}/${numReserva}`, 
+    {
+      headers,
+    }
+  )
+}
 
-
+export const ActualizarEstadoSolicitud = (idSolicitud, idEstado) => {
+  return axios.put(
+    `http://127.0.0.1:8000/api/actualizar/solicitud-reserva/${idSolicitud}/${idEstado}`, 
+    {
+      headers,
+    }
+  )
+}

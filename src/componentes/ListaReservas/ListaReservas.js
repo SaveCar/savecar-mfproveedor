@@ -41,15 +41,18 @@ export const ListaReservas = ({espacio}) => {
             { 
                 espacios !== null ?
                     <>
-                    
-                    <Styles.WrapperTitle>
-                        <Styles.Title style={{'textTransform':'uppercase'}}>
-                            {espacios.espacio.direccion}
-                        </Styles.Title>
-                    </Styles.WrapperTitle>
-                    <Wrapper style={{'marginBottom':'2%'}}>
-                        {listaReservas}
-                    </Wrapper>
+                        <Styles.Wrapper>
+                            <Styles.WrapperTitle>
+                                <Styles.Title style={{'textTransform':'uppercase'}}>
+                                    {espacios.espacio.direccion}
+                                </Styles.Title>
+                            </Styles.WrapperTitle>
+                        </Styles.Wrapper>
+
+                        <Wrapper style={{'marginBottom':'2%'}}>
+                            {listaReservas}
+                        </Wrapper>
+                        
                     </>
                 : 
                     null

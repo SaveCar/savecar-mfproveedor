@@ -60,12 +60,6 @@ export const WrapperDiv = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  @media (min-width: ${minWidth1}) {
-    
-  }
-  @media (min-width: ${maxWidth}) {
-    
-  }
 `;
 
 export const WrapperImage = styled.img`
@@ -135,7 +129,7 @@ export const DivBanner = styled.div`
 
 export const ButtonBanner = styled.button`
   border-radius: 100px;
-  font-weight: 600;
+  font-weight: 400;
   font-family: rubik;
   height: auto;
   font-size: 16px;

@@ -127,7 +127,7 @@ export const DetalleEspacio = ({espacio}) => {
                                             Otros: 
                                         </Styles.Text>
                                     </Styles.WrapperInline> 
-                                    <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px', 'marginTop':'0px'}}>
+                                    <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'10%', 'marginTop':'0px'}}>
                                         <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'Capitalize'}}>
                                             {
                                                 listaServiciosEspacio.map((data,key) => {

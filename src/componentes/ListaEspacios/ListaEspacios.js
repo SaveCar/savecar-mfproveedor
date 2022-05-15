@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     margin-bottom: 5%;
 `;
 
-export const ListaEspacios = ({listaEspacios, onContinue, onReservas}) => {
+export const ListaEspacios = ({listaEspacios, onContinue, onReservas, onSolicitudes, onDisabled}) => {
 
     const [espacios, setEspacios] = useState(listaEspacios);
     var listaEspaciosDisponibles = []
@@ -34,6 +34,8 @@ export const ListaEspacios = ({listaEspacios, onContinue, onReservas}) => {
                     key={key}
                     onContinue={onContinue}
                     onReservas={onReservas}
+                    onSolicitudes={onSolicitudes}
+                    onDisabled={onDisabled}
                 />
             )
         })

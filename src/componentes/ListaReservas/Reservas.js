@@ -2,6 +2,7 @@ import * as Styles from "./Styles.js";
 import arrow_down from "./../../icon/arrow_down.png";
 import arrow_up from "./../../icon/arrow_up.png";
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 export const Reservas = ({cliente, cantidadSolicitada, fechaInicio, cantidadTiempo, tipoCobro, comentario, valorTotal}) => {
 
@@ -33,7 +34,7 @@ export const Reservas = ({cliente, cantidadSolicitada, fechaInicio, cantidadTiem
                         Fecha de inicio: 
                     </Styles.Text>
                     <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
-                        {fechaInicio}
+                        {moment(fechaInicio).format("DD/MM/YYYY")}
                     </Styles.Text>
                 </Styles.WrapperInline>
             

@@ -2,23 +2,28 @@ import * as Styles from "./Styles.js";
 import { DesactivarEspacio, ObtenerTodasReservasAceptadasEspacio, ObtenerTodasSolicitudesEspacio } from "../../servicios/servicio";
 import { useEffect, useState } from "react";
 import * as singleSpa from "single-spa";
+import FondoOpaco from "../Modal/FondoOpaco.js";
+import ModalDesactivarEspacio from "./../Modal/ModalDesactivarEspacio";
 
 
-export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoCobro, imagen, precioEspacio,espacio, onContinue, onReservas}) => {
+export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoCobro, imagen, precioEspacio,espacio,onSolicitudes, onDisabled, onReservas}) => {
     const [solicitudes, setSolicitudes] = useState(null)
     const [reservas, setReservas] = useState(null)
+    const [mainState, setMainState] = useState({
+        isModalOpen: false,
+        isModalClose: false
+    });
+    const[infoModal, setInfoModal] = useState({})
+    
+    const openModal = () => {
+        setMainState((prev) => ({ ...prev, ["isModalOpen"]: true }));
+    };
+
 
     const handleContinue = () => {  
         localStorage.setItem('espacioSeleccionado', JSON.stringify(espacio))
         onContinue() 
     }
-
-    const unmountApplication = (toMf) => {
-        localStorage.setItem("toMf", toMf);
-        singleSpa.unregisterApplication("@savecar/mfproveedor").then(() => {
-            console.log("redireccionando");
-        });
-    };
 
     useEffect(() => {
         ObtenerTodasSolicitudesEspacio(espacio.idEspacio)
@@ -37,14 +42,20 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
     },[])
 
     const handleDisabled = (data) => {
-        DesactivarEspacio(data)
-            .then((res) => {
-                //reload mfproveedor
-                unmountApplication('mfproveedor')
-            })
-            .catch((e) => {
-                console.log(e)
-            })
+        setInfoModal({
+            title: '¿DESEAS CONFIRMAR ESTA SOLICITUD?',
+            button: 'Aceptar',
+            confirm: true
+        })
+        openModal()
+        // DesactivarEspacio(data)
+        //     .then((res) => {
+        //         //reload mfproveedor
+        //         unmountApplication('mfproveedor')
+        //     })
+        //     .catch((e) => {
+        //         console.log(e)
+        //     })
     }
 
     const handleListReserve = (data, espacio) => {
@@ -52,17 +63,42 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
             reserva: data,
             espacio: espacio
         }
-
         localStorage.setItem('reservasEspacio',JSON.stringify(info));
-
         onReservas()
     }
 
+    const handleListSolicitud = (data, espacio) => {
+        const info = {
+            reserva: data,
+            espacio: espacio
+        }
+        localStorage.setItem('solicitudesEspacio',JSON.stringify(info));
+        onSolicitudes()
+    }
     
 
     return(
         <>
+            <ModalDesactivarEspacio
+                    isOpen={mainState.isModalOpen}
+                    onClose={() =>
+                        setMainState((prev) => ({ ...prev, ["isModalOpen"]: false }))
+                    }
+                    setMainState={setMainState}
+                    direccion={direccion}
+                    tipo={tipo}
+                    capacidad={capacidad}
+                    idEspacio={idEspacio}
+                    disponible={disponible}
+                    tipoCobro={tipoCobro}
+                    imagen={imagen}
+                    precioEspacio={precioEspacio}
+                    espacio={espacio}
+                    onContinue={onDisabled}
+                />
             <Styles.Card >
+                
+
                 <Styles.WrapperContent style={{'cursor':'pointer'}} onClick={() => handleContinue(idEspacio)}>
                     <Styles.WrapperInline>
                         <Styles.WrapperDiv style={{'alignItems':'center'}}>
@@ -129,6 +165,7 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
                             <Styles.DivBanner>
                                 <Styles.ButtonBanner
                                     style={{'background':'#DFFADD', 'color':'rgba(16, 121, 77, 1)', 'border':'1px solid #85C9AC'}}
+                                    onClick={() => handleListSolicitud(solicitudes, espacio)}
                                 > 
                                     Solicitudes 
                                 </Styles.ButtonBanner>
@@ -153,6 +190,7 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
                             <Styles.DivBanner>
                                 <Styles.ButtonBanner
                                     style={{'background':'#DFFADD', 'color':'rgba(16, 121, 77, 1)', 'border':'1px solid #85C9AC'}}
+                                    onClick={() => handleListSolicitud(solicitudes, espacio)}
                                 > 
                                     Solicitudes 
                                 </Styles.ButtonBanner>
@@ -175,6 +213,9 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
                 </Styles.Banner>
                     
             </Styles.Card>
+            <FondoOpaco
+                isVisible={mainState.isModalOpen}
+            />
         </>
     )
 }

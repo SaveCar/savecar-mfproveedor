@@ -8,6 +8,9 @@ import { ObtenerComunas, ObtenerServicios, ObtenerTipoCobro, ObtenerTipoSuelo, O
 import ListaEspacios from "../componentes/ListaEspacios/ListaEspacios";
 import DetalleEspacio from "../componentes/DetalleEspacio/DetalleEspacio";
 import ListaReservas from "./../componentes/ListaReservas/ListaReservas";
+import ListaSolicitudes from "../componentes/ListaSolicitudes/ListaSolicitudes";
+import CheckCarga from "./../componentes/CheckCarga/CheckCarga";
+import DesactivarEspacio from "./../componentes/CheckCarga/DesactivarEspacio";
 
 const minWidth1 = rem("600px");
 const minWidth2 = rem("750px");
@@ -92,25 +95,21 @@ const WrapperButton = styled.div`
   }
 `;
 
-
 const WrapperWhite = styled.div`
   background: white;
   height: 100vh;
-  @media (min-width: ${minWidth1}) {
-    height: 110vh;
-  }
-  @media (min-width: ${minWidth2}) {
-    height: 120vh;
-  }
-  @media (min-width: ${maxWidth}) {
-    height: 130vh;
-  }
+  position: absolute;
+  width:100%;
+ 
 `;
 
 const BIENVENIDA = "Welcome";
 const ESPACIOS_REGISTRADOS = "ListaEspacios";
 const DETALLE_ESPACIO = "DetalleEspacio";
 const LISTA_RESERVAS = "ListaReservas";
+const LISTA_SOLICITUDES = "ListaSolicitudes";
+const GUARDAR_RESPUESTA = "CheckCarga";
+const DESACTIVAR_ESPACIO = "DesactivarEspacio";
 
 class Index extends Component {
   constructor(props) {
@@ -255,6 +254,8 @@ class Index extends Component {
               listaEspacios={this.state.listaEspaciosRegistrados}
               onContinue={() => this.changeView(DETALLE_ESPACIO)}
               onReservas={() => this.changeView(LISTA_RESERVAS)}
+              onSolicitudes={() => this.changeView(LISTA_SOLICITUDES)}
+              onDisabled={() => this.changeView(DESACTIVAR_ESPACIO)}
              />
             </WrapperBody>
           </>
@@ -285,7 +286,48 @@ class Index extends Component {
             </WrapperBody>
           </WrapperWhite>
         )
-        
+      case LISTA_SOLICITUDES:
+        return(
+          <WrapperWhite>
+            <WrapperHeader>
+              <Header onBack={() => this.changeView(ESPACIOS_REGISTRADOS)}/>
+            </WrapperHeader>
+            <WrapperBody>
+             <ListaSolicitudes
+                espacio={JSON.parse(localStorage.getItem('solicitudesEspacio'))} 
+                onContinue={() => this.changeView(GUARDAR_RESPUESTA)}
+             />
+            </WrapperBody>
+          </WrapperWhite>
+        )
+      case GUARDAR_RESPUESTA:
+        return(
+          <>
+            <WrapperHeader>
+              <Header menu/>
+            </WrapperHeader>
+
+            <WrapperBody>
+
+              <CheckCarga/>
+            
+            </WrapperBody>
+          </>
+        )
+      case DESACTIVAR_ESPACIO:
+        return(
+          <>
+            <WrapperHeader>
+              <Header menu/>
+            </WrapperHeader>
+
+            <WrapperBody>
+
+              <DesactivarEspacio/>
+            
+            </WrapperBody>
+          </>
+        )
       default:
         return '';
     }

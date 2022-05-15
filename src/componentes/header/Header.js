@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 
 const LogoMenu = styled.img`
   width: 20px;
+  cursor: pointer;
   @media (min-width: ${minWidth1}) {
     width: 25px;
   }
