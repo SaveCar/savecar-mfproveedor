@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import * as singleSpa from "single-spa";
 
 
-export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoCobro, imagen, precioEspacio,espacio, onContinue}) => {
+export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoCobro, imagen, precioEspacio,espacio, onContinue, onReservas}) => {
     const [solicitudes, setSolicitudes] = useState(null)
     const [reservas, setReservas] = useState(null)
 
@@ -19,17 +19,6 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
             console.log("redireccionando");
         });
     };
-
-    const handleDisabled = (data) => {
-        DesactivarEspacio(data)
-            .then((res) => {
-                //reload mfproveedor
-                unmountApplication('mfproveedor')
-            })
-            .catch((e) => {
-                console.log(e)
-            })
-    }
 
     useEffect(() => {
         ObtenerTodasSolicitudesEspacio(espacio.idEspacio)
@@ -46,6 +35,30 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
                 }
             })
     },[])
+
+    const handleDisabled = (data) => {
+        DesactivarEspacio(data)
+            .then((res) => {
+                //reload mfproveedor
+                unmountApplication('mfproveedor')
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
+    const handleListReserve = (data, espacio) => {
+        const info = {
+            reserva: data,
+            espacio: espacio
+        }
+
+        localStorage.setItem('reservasEspacio',JSON.stringify(info));
+
+        onReservas()
+    }
+
+    
 
     return(
         <>
@@ -107,7 +120,11 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
                     reservas && solicitudes ?
                         <>
                             <Styles.DivBanner>
-                                <Styles.ButtonBanner> Reservas </Styles.ButtonBanner>
+                                <Styles.ButtonBanner
+                                    onClick={() => handleListReserve(reservas, espacio)}
+                                > 
+                                    Reservas 
+                                </Styles.ButtonBanner>
                             </Styles.DivBanner>  
                             <Styles.DivBanner>
                                 <Styles.ButtonBanner
@@ -121,7 +138,11 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
                     reservas && !solicitudes ?
                         <>
                             <Styles.DivBanner>
-                                <Styles.ButtonBanner> Reservas </Styles.ButtonBanner>    
+                                <Styles.ButtonBanner
+                                    onClick={() => handleListReserve(reservas, espacio)}
+                                > 
+                                    Reservas 
+                                </Styles.ButtonBanner>    
                             </Styles.DivBanner>  
                             <Styles.DivBanner/> 
                         </>

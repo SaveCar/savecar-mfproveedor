@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { ObtenerComunas, ObtenerServicios, ObtenerTipoCobro, ObtenerTipoSuelo, ObtenerTipoVehiculo, ObtenerTodosEspaciosRegistrados, ObtenerVehiculo } from "../servicios/servicio";
 import ListaEspacios from "../componentes/ListaEspacios/ListaEspacios";
 import DetalleEspacio from "../componentes/DetalleEspacio/DetalleEspacio";
+import ListaReservas from "./../componentes/ListaReservas/ListaReservas";
 
 const minWidth1 = rem("600px");
 const minWidth2 = rem("750px");
@@ -109,6 +110,7 @@ const WrapperWhite = styled.div`
 const BIENVENIDA = "Welcome";
 const ESPACIOS_REGISTRADOS = "ListaEspacios";
 const DETALLE_ESPACIO = "DetalleEspacio";
+const LISTA_RESERVAS = "ListaReservas";
 
 class Index extends Component {
   constructor(props) {
@@ -252,6 +254,7 @@ class Index extends Component {
              <ListaEspacios
               listaEspacios={this.state.listaEspaciosRegistrados}
               onContinue={() => this.changeView(DETALLE_ESPACIO)}
+              onReservas={() => this.changeView(LISTA_RESERVAS)}
              />
             </WrapperBody>
           </>
@@ -269,7 +272,19 @@ class Index extends Component {
             </WrapperBody>
           </WrapperWhite>
         )
-          
+      case LISTA_RESERVAS:
+        return(
+          <WrapperWhite>
+            <WrapperHeader>
+              <Header onBack={() => this.changeView(ESPACIOS_REGISTRADOS)}/>
+            </WrapperHeader>
+            <WrapperBody>
+             <ListaReservas
+                espacio={JSON.parse(localStorage.getItem('reservasEspacio'))} 
+             />
+            </WrapperBody>
+          </WrapperWhite>
+        )
         
       default:
         return '';
