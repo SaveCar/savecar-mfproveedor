@@ -11,6 +11,7 @@ import ListaReservas from "./../componentes/ListaReservas/ListaReservas";
 import ListaSolicitudes from "../componentes/ListaSolicitudes/ListaSolicitudes";
 import CheckCarga from "./../componentes/CheckCarga/CheckCarga";
 import DesactivarEspacio from "./../componentes/CheckCarga/DesactivarEspacio";
+import ListaOpciones from "../componentes/listaOpciones/ListaOpciones";
 
 const minWidth1 = rem("600px");
 const minWidth2 = rem("750px");
@@ -18,8 +19,8 @@ const minWidth3 = rem("950px");
 const maxWidth = rem("1200px");
 
 export const WrapperHeader = styled.div`
+  background: rgba(0, 0, 0, 1);
   padding: 0px 16px;
-  background: #304562;
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -40,13 +41,31 @@ export const WrapperHeader = styled.div`
   }
 `;
 
-export const WrapperBody = styled.div`
+
+const WrapperBody = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   align-content: center;
-  flex-direction:column;
+  margin:auto;
+  flex-direction: column;
+  @media (min-width: ${minWidth1}) {
+    width: 80%;
+    margin-bottom: 24px;
+  }
+  @media (min-width: ${minWidth2}) {
+    width: 70%;
+    margin-bottom: 24px;
+  }
+  @media (min-width: ${minWidth3}) {
+    width: 60%;
+    margin-bottom: 24px;
+  }
+  @media (min-width: ${maxWidth}) {
+    width: 50%;
+  }
 `;
-
+ 
 
 export const Button = styled.button`
   border-radius: 100px;
@@ -76,32 +95,22 @@ export const Button = styled.button`
   }
 `;
 
-const WrapperButton = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 94.5%;
+const Title = styled.h1`
+  font-size: 32px;
+  text-align: center;
+  color: #000000;
+  font-weight: 600;
+  font-family: rubik;
+  margin-top: 10px;
   @media (min-width: ${minWidth1}) {
-    width: 89.5%;
+    font-size: 37px;
+    margin-top: 15px;
   }
   @media (min-width: ${minWidth2}) {
-    width: 84.5%;
-  }
-  @media (min-width: ${minWidth3}) {
-    width: 79.5%;
-  }
-  @media (min-width: ${maxWidth}) {
-    width: 74.5%;
+    font-size: 43px;
   }
 `;
 
-const WrapperWhite = styled.div`
-  background: white;
-  height: 100vh;
-  position: absolute;
-  width:100%;
- 
-`;
 
 const BIENVENIDA = "Welcome";
 const ESPACIOS_REGISTRADOS = "ListaEspacios";
@@ -110,6 +119,7 @@ const LISTA_RESERVAS = "ListaReservas";
 const LISTA_SOLICITUDES = "ListaSolicitudes";
 const GUARDAR_RESPUESTA = "CheckCarga";
 const DESACTIVAR_ESPACIO = "DesactivarEspacio";
+const LISTA_OPCIONES = "";
 
 class Index extends Component {
   constructor(props) {
@@ -193,7 +203,7 @@ class Index extends Component {
       this.setState({VIEW: BIENVENIDA});
     }
     if (this.state.espaciosRegistrados){
-      this.setState({VIEW: ESPACIOS_REGISTRADOS})
+      this.setState({VIEW: LISTA_OPCIONES})
     }
   };
 
@@ -237,18 +247,33 @@ class Index extends Component {
             </WrapperBody>
           </>
         );
-      case ESPACIOS_REGISTRADOS:
+      case LISTA_OPCIONES:
         return(
           <>
             <WrapperHeader>
               <Header menu/>
             </WrapperHeader>
+            <WrapperBody style={{'padding':'0px 16px'}}>
+              <Title>¿Qué deseas hacer?</Title>
+              <ListaOpciones 
+                registrar={() => this.handleNew()}
+                espacios={() => this.changeView(ESPACIOS_REGISTRADOS)}
+                reservas={() => this.changeView(LISTA_RESERVAS)}
+                solicitudes={() => this.changeView(LISTA_SOLICITUDES)}
+              />
+            </WrapperBody>
+          </>
+        );
+      case ESPACIOS_REGISTRADOS:
+        return(
+          <>
+            <WrapperHeader>
+              <Header onBack={() => this.changeView(LISTA_OPCIONES)}/>
+            </WrapperHeader>
 
             <WrapperBody>
 
-              <WrapperButton>
-                <Button onClick={() => this.handleNew()}>Nuevo espacio</Button>
-              </WrapperButton>
+            <Title style={{'marginBottom':'0px'}}>Espacios registrados</Title>
 
              <ListaEspacios
               listaEspacios={this.state.listaEspaciosRegistrados}
@@ -262,7 +287,7 @@ class Index extends Component {
         )
       case DETALLE_ESPACIO:
         return(
-          <WrapperWhite>
+          <>
             <WrapperHeader>
               <Header onBack={() => this.changeView(ESPACIOS_REGISTRADOS)}/>
             </WrapperHeader>
@@ -271,34 +296,34 @@ class Index extends Component {
               espacio={JSON.parse(localStorage.getItem('espacioSeleccionado'))} 
              />
             </WrapperBody>
-          </WrapperWhite>
+          </>
         )
       case LISTA_RESERVAS:
         return(
-          <WrapperWhite>
+          <>
             <WrapperHeader>
-              <Header onBack={() => this.changeView(ESPACIOS_REGISTRADOS)}/>
+              <Header onBack={() => this.changeView(LISTA_OPCIONES)}/>
             </WrapperHeader>
             <WrapperBody>
              <ListaReservas
-                espacio={JSON.parse(localStorage.getItem('reservasEspacio'))} 
+                espacio={JSON.parse(localStorage.getItem('reservasEspacio')) || null} 
              />
             </WrapperBody>
-          </WrapperWhite>
+          </>
         )
       case LISTA_SOLICITUDES:
         return(
-          <WrapperWhite>
+          <>
             <WrapperHeader>
-              <Header onBack={() => this.changeView(ESPACIOS_REGISTRADOS)}/>
+              <Header onBack={() => this.changeView(LISTA_OPCIONES)}/>
             </WrapperHeader>
             <WrapperBody>
              <ListaSolicitudes
-                espacio={JSON.parse(localStorage.getItem('solicitudesEspacio'))} 
+                espacio={JSON.parse(localStorage.getItem('solicitudesEspacio')) || null} 
                 onContinue={() => this.changeView(GUARDAR_RESPUESTA)}
              />
             </WrapperBody>
-          </WrapperWhite>
+          </>
         )
       case GUARDAR_RESPUESTA:
         return(
@@ -314,20 +339,7 @@ class Index extends Component {
             </WrapperBody>
           </>
         )
-      case DESACTIVAR_ESPACIO:
-        return(
-          <>
-            <WrapperHeader>
-              <Header menu/>
-            </WrapperHeader>
-
-            <WrapperBody>
-
-              <DesactivarEspacio/>
-            
-            </WrapperBody>
-          </>
-        )
+      
       default:
         return '';
     }

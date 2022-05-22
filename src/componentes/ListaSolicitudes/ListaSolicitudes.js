@@ -17,9 +17,7 @@ export const ListaSolicitudes = ({espacio, onContinue}) => {
     const [espacios, setEspacios] = useState(espacio);
     var listaReservas = []
     
-    localStorage.setItem('disponibles', espacios.espacio.disponible)
-
-    console.log(espacios)
+   
 
     if (espacios !== null) {
         espacios.reserva.map((data, key) => {
@@ -61,7 +59,11 @@ export const ListaSolicitudes = ({espacio, onContinue}) => {
                     </Wrapper>
                     </>
                 : 
-                    null
+                <Styles.Wrapper>
+                    <Styles.Text style={{'marginTop':'5%', 'fontStyle':'italic'}}>
+                        No hay solicitudes activas
+                    </Styles.Text>
+                </Styles.Wrapper>
             }
         </>
     )

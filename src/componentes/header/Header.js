@@ -15,8 +15,13 @@ const Wrapper = styled.div`
   flex-wrap: nowrap;
   flex-direction: row;
   width: 100%;
+  @media (min-width: ${minWidth1}) {
+    width: 100%;
+  }
+  @media (min-width: ${maxWidth}) {
+    width: 100%;
+  }
 `;
-
 
 const LogoMenu = styled.img`
   width: 20px;
@@ -31,21 +36,21 @@ const LogoMenu = styled.img`
 
 
 const LogoSaveCar = styled.img`
-  background: #FFF9D5;
-  border-radius: 100%;
-  padding: 5px;
-  width: 20px;
-  @media (min-width: ${minWidth1}) {
-    width: 25px;
-  }
-  @media (min-width: ${minWidth2}) {
-    width: 30px;
-  }
+background:rgba(255, 255, 255, 1);
+border-radius: 100%;
+padding: 5px;
+width: 20px;
+@media (min-width: ${minWidth1}) {
+  width: 25px;
+}
+@media (min-width: ${minWidth2}) {
+  width: 30px;
+}
 `;
 
 const Title = styled.h1`
   font-size: 20px;
-  color: #FFF9D5;
+  color: rgba(255, 255, 255, 1);
   font-weight: 700;
   font-family: rubik;
   margin-left: 5px;
@@ -58,7 +63,6 @@ const Title = styled.h1`
     margin-left: 11px;
   }
 `;
-
 
 const WrapperTitle = styled.div`
   margin: auto;

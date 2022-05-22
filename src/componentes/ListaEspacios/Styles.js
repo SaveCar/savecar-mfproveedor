@@ -23,28 +23,20 @@ export const Card = styled.div`
   align-items: center;
   align-content: center;
   flex-direction: column;
-  margin: 2% 0%;
-  @media (min-width: ${minWidth1}) {
-    width: 80%;
-    margin-bottom: 24px;
-  }
+  margin-top: 7%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
   @media (min-width: ${minWidth2}) {
-    width: 70%;
-    margin-bottom: 24px;
+    margin-top: 5%;
   }
   @media (min-width: ${minWidth3}) {
-    width: 60%;
-    margin-bottom: 24px;
-  }
-  @media (min-width: ${maxWidth}) {
-    width: 50%;
+    padding: 0.5% 4%;
   }
 `;
 
 export const WrapperContent = styled.div`
   display: block;
   padding: 4% 8%;
-  padding-bottom: 1%;
 `;
 
 
@@ -57,22 +49,13 @@ export const WrapperInline = styled.div`
 
 
 export const WrapperDiv = styled.div`
-  width: 50%;
   display: flex;
   flex-direction: column;
 `;
 
 export const WrapperImage = styled.img`
-  width: 60%;
-  @media (min-width: ${minWidth1}) {
-    width: 65%;
-  }
-  @media (min-width: ${minWidth2}) {
-    width: 70%;
-  }
-  @media (min-width: ${maxWidth}) {
-    width: 55%;
-  }
+  width: 90%;
+  
 `;
 
 export const Text = styled.p`

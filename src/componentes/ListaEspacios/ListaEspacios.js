@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     margin-bottom: 5%;
+    width: 100%;
 `;
 
 export const ListaEspacios = ({listaEspacios, onContinue, onReservas, onSolicitudes, onDisabled}) => {

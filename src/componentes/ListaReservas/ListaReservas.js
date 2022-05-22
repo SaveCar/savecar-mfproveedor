@@ -16,8 +16,6 @@ export const ListaReservas = ({espacio}) => {
 
     const [espacios, setEspacios] = useState(espacio);
     var listaReservas = []
-    
-    console.log(espacios.espacio)
 
     if (espacios !== null) {
         espacios.reserva.map((data, key) => {
@@ -55,7 +53,12 @@ export const ListaReservas = ({espacio}) => {
                         
                     </>
                 : 
-                    null
+                <Styles.Wrapper>
+                    <Styles.Text style={{'marginTop':'5%', 'fontStyle':'italic'}}>
+                        No hay reservas activas
+                    </Styles.Text>
+                </Styles.Wrapper>
+                    
             }
         </>
     )

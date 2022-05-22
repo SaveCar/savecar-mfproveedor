@@ -31,7 +31,6 @@ const BackgroundWrapper = styled.div`
     animation: ${keyFrameExampleOne} 0.3s ease-in-out 0s;
     margin: auto;
     width: 100%;
-    margin-bottom: 60%;
     @media (min-width: ${minWidth1}) {
       width: 80%;
     }
@@ -40,7 +39,6 @@ const BackgroundWrapper = styled.div`
     }
     @media (min-width: ${minWidth3}) {
       width: 60%;
-      margin-bottom: 70%;
     }
     @media (min-width: ${maxWidth}) {
       width: 50%;

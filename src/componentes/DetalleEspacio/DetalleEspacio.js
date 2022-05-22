@@ -1,6 +1,6 @@
 import * as Styles from "./Styles.js";
-import arrow_down from "./../../icon/arrow_down.png";
-import arrow_up from "./../../icon/arrow_up.png";
+import arrow_down from "./../../icon/arrrow_down.png";
+import arrow_up from "./../../icon/arrrow_up.png";
 import { useEffect, useState } from "react";
 
 export const DetalleEspacio = ({espacio}) => {
@@ -18,16 +18,12 @@ export const DetalleEspacio = ({espacio}) => {
 
     const handleDescription = () => {
         if(descripcionDisabled){
-            console.log('mostrar descripcion')
             setDescripcionDisabled(false)
         }else{
-            console.log('ocultar descripcion')
             setDescripcionDisabled(true)
         }
     }
 
-    
-  
 
     return(
         <>
@@ -46,7 +42,7 @@ export const DetalleEspacio = ({espacio}) => {
                             <Styles.Text style={{'fontWeight':'400'}}>
                                 Tipo: 
                             </Styles.Text>
-                            <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
+                            <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
                                 {espacio.vehiculo}
                             </Styles.Text>
                         </Styles.WrapperInline>
@@ -78,9 +74,9 @@ export const DetalleEspacio = ({espacio}) => {
                     </Styles.TextBanner>
                     {
                         descripcionDisabled ?
-                            <img src={arrow_down} style={{'marginRight':'10%'}}/>
+                            <Styles.LogoArrow src={arrow_down} style={{'marginRight':'10%'}}/>
                         : 
-                            <img src={arrow_up} style={{'marginRight':'10%'}}/>
+                            <Styles.LogoArrow src={arrow_up} style={{'marginRight':'10%'}}/>
                            
                     }
                     

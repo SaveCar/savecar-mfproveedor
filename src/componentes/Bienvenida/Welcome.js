@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { rem } from "polished";
-import create from "../../icon/create.png";
+import create from "../../icon/save.png";
 
 
 const minWidth1 = rem("600px");
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #304562;
+  color: rgba(0, 0, 0, 1);
   font-size: 30px;
   text-align: center;
   font-weight: 600;
@@ -45,6 +45,7 @@ const WrapperImage = styled.div`
 const Image = styled.img`
   margin-top: 64px;
   margin-bottom: 24px;
+  width: 70px;
   @media (min-width: ${minWidth1}) {
     width: 90px;
     margin-top: 60px;
@@ -56,7 +57,7 @@ const Image = styled.img`
 `;
 
 const SubTitle = styled.h2`
-  color: #304562;
+  color: rgba(0, 0, 0, 1);
   font-size: 22px;
   text-align: center;
   font-weight: 500;
@@ -73,7 +74,7 @@ const SubTitle = styled.h2`
 const Text = styled.p`
   font-size: 16px;
   text-align: center;
-  color: #304562;
+  color: rgba(0, 0, 0, 1);
   font-weight: 300;
   font-family: rubik;
   margin: 0px;
@@ -93,24 +94,24 @@ export const Button = styled.button`
   height: auto;
   font-size: 16px;
   width: auto;
-  background: #F6EBCF;
-  color: #304562;
-  border: 1px solid #CBBBA1;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 1);
   cursor: pointer;
-  padding: 2% 10%;
-  margin-top: 36px;
+  padding: 3% 10%;
+  margin-top:8%;
   @media (min-width: ${minWidth1}) {
     font-size: 18px;
     height: auto;
     width: auto;
-    padding: 2% 10%;
+    margin-top:5%;
   }
   @media (min-width: ${minWidth2}) {
     font-size: 20px;
-    padding: 1.6% 10%;
+    padding: 2.5% 10%;
   }
   @media (min-width: ${maxWidth}) {
-    padding: 1.4% 10%;
+    padding: 2% 10%;
   }
 `;
 
