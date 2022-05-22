@@ -129,3 +129,13 @@ export const ActualizarEstadoSolicitud = (idSolicitud, idEstado) => {
     }
   )
 }
+
+export const ObtenerEspacioByUsuarioAndEstado = (idUsuario, idEstado) => {
+  return axios.get(
+    `http://127.0.0.1:8000/api/obtener/espacio/${idUsuario}/${idEstado}`, 
+    {
+      headers,
+    }
+  )
+}
+

@@ -4,76 +4,76 @@ import arrow_up from "./../../icon/arrow_up.png";
 import { useEffect, useState } from "react";
 import moment from "moment";
 
-export const Reservas = ({cliente, cantidadSolicitada, fechaInicio, cantidadTiempo, tipoCobro, comentario, valorTotal}) => {
+export const Reservas = ({cliente,imagen,direccion,disponible, cantidadSolicitada, fechaTermino, cantidadTiempo, tipoCobro, valorTotal}) => {
 
 
     return(
         <>
-            <Styles.Wrapper>
-               
-                <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
-                    <Styles.Text style={{'fontWeight':'600'}}>
-                        Cliente: 
-                    </Styles.Text>
-                    <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
-                        {cliente}
-                    </Styles.Text>
-                </Styles.WrapperInline>
-                
-                <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
-                    <Styles.Text style={{'fontWeight':'600'}}>
-                        Cantidad solicitada: 
-                    </Styles.Text>
-                    <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
-                        {cantidadSolicitada}
-                    </Styles.Text>
-                </Styles.WrapperInline>
-        
-                <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
-                    <Styles.Text style={{'fontWeight':'600'}}>
-                        Fecha de inicio: 
-                    </Styles.Text>
-                    <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
-                        {moment(fechaInicio).format("DD/MM/YYYY")}
-                    </Styles.Text>
-                </Styles.WrapperInline>
-            
-                <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
-                    <Styles.Text style={{'fontWeight':'600'}}>
-                        Cantidad de tiempo: 
-                    </Styles.Text>
-                    <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'lowerCase'}}>
-                        {cantidadTiempo} {tipoCobro}s
-                    </Styles.Text>
-                </Styles.WrapperInline>
+            <Styles.Card>
+                <Styles.WrapperContent>
+                    <Styles.WrapperInline>
+                        <Styles.WrapperDiv style={{'alignItems':'center', 'width':'40%'}}>
+                            <Styles.WrapperImage 
+                                src={"http://127.0.0.1:8000" + imagen} alt={imagen}
+                            />
+                        </Styles.WrapperDiv>
+                        <Styles.WrapperDiv style={{'width':'60%'}}>
+                            <Styles.Text style={{'fontWeight':'400', 'textTransform':'uppercase'}}>
+                                {direccion}
+                            </Styles.Text>
 
-                {
-                    comentario !== null &&
-                    <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
-                        <Styles.Text style={{'fontWeight':'600'}}>
-                            Comentario: 
-                        </Styles.Text>
-                        <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
-                            {comentario}
-                        </Styles.Text>
+                            <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
+                                <Styles.Text style={{'fontWeight':'400'}}>
+                                    Cliente: 
+                                </Styles.Text>
+                                <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
+                                    {cliente}
+                                </Styles.Text>
+                            </Styles.WrapperInline>
+                            
+                            <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
+                                <Styles.Text style={{'fontWeight':'400'}}>
+                                    Cantidad solicitada: 
+                                </Styles.Text>
+                                <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
+                                    {cantidadSolicitada}
+                                </Styles.Text>
+                            </Styles.WrapperInline>
+
+                            <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
+                                <Styles.Text style={{'fontWeight':'400'}}>
+                                    Fecha de término: 
+                                </Styles.Text>
+                                <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
+                                    {moment(fechaTermino).format("DD/MM/YYYY")}         
+                                </Styles.Text>
+                            </Styles.WrapperInline>
+
+                            <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
+                                <Styles.Text style={{'fontWeight':'400'}}>
+                                    Cantidad de tiempo: 
+                                </Styles.Text>
+                                <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
+                                    {cantidadTiempo} {tipoCobro}s   
+                                </Styles.Text>
+                            </Styles.WrapperInline>
+
+                            <Styles.LineSmall/>
+
+                            <Styles.WrapperInline style={{'marginBottom':'0px'}}>
+                                <Styles.Text style={{'fontWeight':'400'}}>
+                                   Valor total:  
+                                </Styles.Text>
+                                <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
+                                    ${valorTotal}
+                                </Styles.Text>
+                            </Styles.WrapperInline>
+                          
+                        </Styles.WrapperDiv>
                     </Styles.WrapperInline>
-                }
+                </Styles.WrapperContent>
                 
-            
-                <Styles.LineSmall/>
-
-                <Styles.WrapperInline style={{'justifyContent': 'space-between', 'marginBottom':'0px'}}>
-                    <Styles.Text style={{'fontWeight':'600'}}>
-                        Valor total: 
-                    </Styles.Text>
-                    <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
-                        ${valorTotal}
-                    </Styles.Text>
-                </Styles.WrapperInline>
-              
-               <Styles.LineBig/>
-
-            </Styles.Wrapper>
+            </Styles.Card>
             
            
         </>

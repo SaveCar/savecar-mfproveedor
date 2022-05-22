@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     margin-bottom: 5%;
+    width: 100%;
 `;
 
 export const ListaSolicitudes = ({espacio, onContinue}) => {
@@ -17,21 +18,23 @@ export const ListaSolicitudes = ({espacio, onContinue}) => {
     const [espacios, setEspacios] = useState(espacio);
     var listaReservas = []
     
-   
+
 
     if (espacios !== null) {
-        espacios.reserva.map((data, key) => {
+        espacios.map((data, key) => {
             listaReservas.push(
                 <Solicitudes 
                     cliente={data.nombreCliente}
-                    cantidadSolicitada={data.cantidadReserva}
+                    cantidadSolicitada={data.capacidadReserva}
                     fechaInicio={data.fechaInicio}
-                    cantidadTiempo={data.cantidadTiempo}
-                    tipoCobro={espacios.espacio.tipoCobro}
-                    comentario={data.comentario}
-                    valorTotal={(data.cantidadReserva * espacios.espacio.precio * data.cantidadTiempo)}
+                    cantidadTiempo={data.totalTiempo}
+                    tipoCobro={data.tipoCobro}
+                    valorTotal={(data.capacidadReserva * data.precioEspacio * data.totalTiempo)}
                     solicitud={data}
                     onContinue={onContinue}
+                    imagen={data.imagenEspacio}
+                    direccion={data.direccion}
+                    disponible={data.disponible}
                     key={key}
                 />
             )
@@ -43,20 +46,9 @@ export const ListaSolicitudes = ({espacio, onContinue}) => {
             { 
                 espacios !== null ?
                     <>
-                    <Styles.Wrapper>
-                        <Styles.WrapperTitle style={{'flexDirection':'column'}}>
-                            <Styles.Title style={{'textTransform':'uppercase'}}>
-                                {espacios.espacio.direccion}
-                            </Styles.Title>
-                            <Styles.Text>
-                                Disponible: {localStorage.getItem('disponibles')}
-                            </Styles.Text>
-                        </Styles.WrapperTitle>
-                    </Styles.Wrapper>
-
-                    <Wrapper style={{'marginBottom':'2%'}}>
-                        {listaReservas}
-                    </Wrapper>
+                        <Wrapper style={{'marginBottom':'2%'}}>
+                            {listaReservas}
+                        </Wrapper>
                     </>
                 : 
                 <Styles.Wrapper>

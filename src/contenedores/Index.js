@@ -4,7 +4,7 @@ import * as singleSpa from "single-spa";
 import { rem } from "polished";
 import Header from "../componentes/header/Header";
 import styled from "styled-components";
-import { ObtenerComunas, ObtenerServicios, ObtenerTipoCobro, ObtenerTipoSuelo, ObtenerTipoVehiculo, ObtenerTodosEspaciosRegistrados, ObtenerVehiculo } from "../servicios/servicio";
+import { ObtenerComunas, ObtenerEspacioByUsuarioAndEstado, ObtenerServicios, ObtenerTipoCobro, ObtenerTipoSuelo, ObtenerTipoVehiculo, ObtenerTodosEspaciosRegistrados, ObtenerVehiculo } from "../servicios/servicio";
 import ListaEspacios from "../componentes/ListaEspacios/ListaEspacios";
 import DetalleEspacio from "../componentes/DetalleEspacio/DetalleEspacio";
 import ListaReservas from "./../componentes/ListaReservas/ListaReservas";
@@ -196,6 +196,38 @@ class Index extends Component {
         this.setState({espaciosRegistrados: false})
         this.configureViews()
       })
+
+
+      //Obtener todos los espacio estado -> 8 esperando respuesta (solicitudes)
+      ObtenerEspacioByUsuarioAndEstado(this.state.userData.data.idUsuario, 8)
+        .then((res) => {
+          if(res.data.length > 0){
+            console.log(res.data)
+            localStorage.setItem('listaSolicitudesProveedor', JSON.stringify(res.data))
+            this.setState({espaciosRegistrados: true})
+            this.configureViews()
+          }else{
+            localStorage.removeItem('listaSolicitudesProveedor')
+            this.setState({espaciosRegistrados: false})
+            this.configureViews()
+          }
+        })
+
+      //Obtener todos los espacios estado -> 5 aceptado (reservas)
+      ObtenerEspacioByUsuarioAndEstado(this.state.userData.data.idUsuario, 5)
+      .then((res) => {
+        if(res.data.length > 0){
+          
+          localStorage.setItem('listaReservasProveedor', JSON.stringify(res.data))
+          this.setState({espaciosRegistrados: true})
+          this.configureViews()
+        }else{
+          localStorage.removeItem('listaReservasProveedor')
+          this.setState({espaciosRegistrados: false})
+          this.configureViews()
+        }
+      })
+
   }
 
   configureViews = () => {
@@ -305,8 +337,9 @@ class Index extends Component {
               <Header onBack={() => this.changeView(LISTA_OPCIONES)}/>
             </WrapperHeader>
             <WrapperBody>
+              <Title style={{'marginBottom':'0px'}}>Reservas</Title>
              <ListaReservas
-                espacio={JSON.parse(localStorage.getItem('reservasEspacio')) || null} 
+                espacio={JSON.parse(localStorage.getItem('listaReservasProveedor')) || null} 
              />
             </WrapperBody>
           </>
@@ -318,8 +351,9 @@ class Index extends Component {
               <Header onBack={() => this.changeView(LISTA_OPCIONES)}/>
             </WrapperHeader>
             <WrapperBody>
+              <Title style={{'marginBottom':'0px'}}>Solicitudes </Title>
              <ListaSolicitudes
-                espacio={JSON.parse(localStorage.getItem('solicitudesEspacio')) || null} 
+                espacio={JSON.parse(localStorage.getItem('listaSolicitudesProveedor')) || null} 
                 onContinue={() => this.changeView(GUARDAR_RESPUESTA)}
              />
             </WrapperBody>

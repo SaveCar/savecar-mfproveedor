@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     margin-bottom: 5%;
+    width: 100%;
 `;
 
 export const ListaReservas = ({espacio}) => {
@@ -18,16 +19,19 @@ export const ListaReservas = ({espacio}) => {
     var listaReservas = []
 
     if (espacios !== null) {
-        espacios.reserva.map((data, key) => {
+        espacios.map((data, key) => {
             listaReservas.push(
                 <Reservas 
                     cliente={data.nombreCliente}
                     cantidadSolicitada={data.capacidadReserva}
-                    fechaInicio={data.fechaInicio}
+                    fechaTermino={data.fechaFin}
                     cantidadTiempo={data.totalTiempo}
-                    tipoCobro={espacios.espacio.tipoCobro}
-                    comentario={data.comentario}
-                    valorTotal={(data.capacidadReserva * espacios.espacio.precio * data.totalTiempo)}
+                    tipoCobro={data.tipoCobro}
+                    valorTotal={(data.capacidadReserva * data.precioEspacio * data.totalTiempo)}
+                    solicitud={data}
+                    imagen={data.imagenEspacio}
+                    direccion={data.direccion}
+                    disponible={data.disponible}
                     key={key}
                 />
             )
@@ -39,14 +43,6 @@ export const ListaReservas = ({espacio}) => {
             { 
                 espacios !== null ?
                     <>
-                        <Styles.Wrapper>
-                            <Styles.WrapperTitle>
-                                <Styles.Title style={{'textTransform':'uppercase'}}>
-                                    {espacios.espacio.direccion}
-                                </Styles.Title>
-                            </Styles.WrapperTitle>
-                        </Styles.Wrapper>
-
                         <Wrapper style={{'marginBottom':'2%'}}>
                             {listaReservas}
                         </Wrapper>
