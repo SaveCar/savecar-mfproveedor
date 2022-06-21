@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { rem } from "polished";
-import icon_menu from "./../../icon/menu.svg";
+import icon_menu from "./../../icon/exit.png";
 import icon_save_car from "./../../icon/logo.svg";
 import icon_back from "./../../icon/back.svg";
 
@@ -75,13 +75,15 @@ const WrapperTitle = styled.div`
   flex-direction: row;
 `;
 
+
+
 const Header = ({menu, onBack}) => {
   return (
     <>
       <Wrapper>
         {
           menu &&
-          <LogoMenu src={icon_menu}></LogoMenu>  
+          <LogoMenu src={icon_menu} onClick={menu}></LogoMenu>  
         }
         
         {

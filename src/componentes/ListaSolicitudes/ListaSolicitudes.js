@@ -25,11 +25,11 @@ export const ListaSolicitudes = ({espacio, onContinue}) => {
             listaReservas.push(
                 <Solicitudes 
                     cliente={data.nombreCliente}
-                    cantidadSolicitada={data.capacidadReserva}
+                    fechaTermino={data.fechaFin}
                     fechaInicio={data.fechaInicio}
-                    cantidadTiempo={data.totalTiempo}
+                    cantidadSolicitada={data.capacidadReserva}
                     tipoCobro={data.tipoCobro}
-                    valorTotal={(data.capacidadReserva * data.precioEspacio * data.totalTiempo)}
+                    valorTotal={data.precio}
                     solicitud={data}
                     onContinue={onContinue}
                     imagen={data.imagenEspacio}

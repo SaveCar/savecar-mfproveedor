@@ -139,3 +139,8 @@ export const ObtenerEspacioByUsuarioAndEstado = (idUsuario, idEstado) => {
   )
 }
 
+export const ValidarDisponibilidadByIdEspacioFInicioFTerminoCantidad = (idEspacio, fInicio, fTermino, cantidad) => {
+  return axios.get(
+    `http://127.0.0.1:8000/api/verificar/disponibilidad/${idEspacio}/${fInicio}/${fTermino}/${cantidad}`
+  )
+}

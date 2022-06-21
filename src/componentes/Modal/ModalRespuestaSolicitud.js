@@ -3,7 +3,6 @@ import styled, {keyframes} from "styled-components";
 import { rem } from "polished";
 import icono_close from "./../../icon/close.svg";
 import moment from "moment";
-import { Button } from "../ListaSolicitudes/Styles";
 
 const minWidth1 = rem("600px");
 const minWidth2 = rem("750px");
@@ -32,7 +31,7 @@ const BackgroundWrapper = styled.div`
     animation: ${keyFrameExampleOne} 0.3s ease-in-out 0s;
     margin: auto;
     width: 100%;
-    margin-top: -10%;
+    margin: auto;
     @media (min-width: ${minWidth1}) {
       width: 80%;
     }
@@ -87,7 +86,7 @@ export const Text = styled.p`
   font-size: 14px;
   display: block;
   margin: 2px 0px;
-  color: #304562;
+  color: black;
   @media (min-width: ${minWidth1}) {
     font-size: 15px;
   }
@@ -108,13 +107,13 @@ export const WrapperInline = styled.div`
 
 
 export const LineSmall = styled.hr`
-  border: 1px solid rgba(203, 187, 161, 0.6);
-  background: rgb(203 187 161 / 89%);
+  border: 1px solid black;
+  background: black;
   width: 80%;
 `;
 
 export const Title = styled.h1`
-  color: #304562;
+  color: black;
   font-size: 18px;
   text-align: center;
   font-weight: 700;
@@ -126,6 +125,35 @@ export const Title = styled.h1`
   @media (min-width: ${minWidth2}) {
     font-size: 24px;
 `;
+
+export const Button = styled.button`
+  border-radius: 100px;
+  font-weight: 600;
+  font-family: rubik;
+  height: auto;
+  font-size: 16px;
+  width: auto;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 1);
+  cursor: pointer;
+  padding: 3% 10%;
+  margin-top:8%;
+  @media (min-width: ${minWidth1}) {
+    font-size: 18px;
+    height: auto;
+    width: auto;
+    margin-top:5%;
+  }
+  @media (min-width: ${minWidth2}) {
+    font-size: 20px;
+    padding: 2.5% 10%;
+  }
+  @media (min-width: ${maxWidth}) {
+    padding: 2% 10%;
+  }
+`;
+
 
 
 class ModalRespuestaSolicitud extends React.Component {
@@ -141,7 +169,8 @@ class ModalRespuestaSolicitud extends React.Component {
     }
 
     handleChangeStatus(info, solicitud) {
-      const idSolicitud = solicitud.solicitud;
+      const idSolicitud = solicitud.idSolicitud;
+
       var estadoRespuesta = null;
       //confirmar solicitud + cambiar nro espacios disponibles
       
@@ -156,7 +185,8 @@ class ModalRespuestaSolicitud extends React.Component {
       const respuesta = {
         'respuesta' : info,
         'idSolicitud': idSolicitud,
-        'estado': estadoRespuesta
+        'estado': estadoRespuesta,
+        'solicitud':solicitud
       }
 
       localStorage.setItem('guardarRespuestaSolicitud', JSON.stringify(respuesta))
@@ -224,26 +254,13 @@ class ModalRespuestaSolicitud extends React.Component {
             
                 <WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
                     <Text style={{'fontWeight':'600'}}>
-                        Cantidad de tiempo: 
+                        Fecha de término: 
                     </Text>
-                    <Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'lowerCase'}}>
-                        {this.props.cantidadTiempo} {this.props.tipoCobro}s
+                    <Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
+                        {moment(this.props.fechaTermino).format("DD/MM/YYYY")}
                     </Text>
                 </WrapperInline>
 
-                {
-                    this.props.comentario !== null &&
-                    <WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
-                        <Text style={{'fontWeight':'600'}}>
-                            Comentario: 
-                        </Text>
-                        <Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
-                            {this.props.comentario}
-                        </Text>
-                    </WrapperInline>
-                }
-                
-            
                 <LineSmall/>
 
                 <WrapperInline style={{'justifyContent': 'space-around', 'marginTop':'0px'}}>

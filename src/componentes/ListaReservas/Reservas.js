@@ -4,7 +4,7 @@ import arrow_up from "./../../icon/arrow_up.png";
 import { useEffect, useState } from "react";
 import moment from "moment";
 
-export const Reservas = ({cliente,imagen,direccion,disponible, cantidadSolicitada, fechaTermino, cantidadTiempo, tipoCobro, valorTotal}) => {
+export const Reservas = ({cliente,imagen,direccion,fechaInicio, cantidadSolicitada, fechaTermino, valorTotal}) => {
 
 
     return(
@@ -42,19 +42,19 @@ export const Reservas = ({cliente,imagen,direccion,disponible, cantidadSolicitad
 
                             <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
                                 <Styles.Text style={{'fontWeight':'400'}}>
-                                    Fecha de término: 
+                                    Fecha de inicio: 
                                 </Styles.Text>
                                 <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
-                                    {moment(fechaTermino).format("DD/MM/YYYY")}         
+                                    {moment(fechaInicio).format("DD/MM/YYYY")}         
                                 </Styles.Text>
                             </Styles.WrapperInline>
 
                             <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
                                 <Styles.Text style={{'fontWeight':'400'}}>
-                                    Cantidad de tiempo: 
+                                    Fecha de término: 
                                 </Styles.Text>
                                 <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
-                                    {cantidadTiempo} {tipoCobro}s   
+                                    {moment(fechaTermino).format("DD/MM/YYYY")}         
                                 </Styles.Text>
                             </Styles.WrapperInline>
 

@@ -50,7 +50,7 @@ export const DetalleEspacio = ({espacio}) => {
                     <Styles.WrapperDiv style={{'width':'30%'}}>
                         <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
                             <Styles.Text style={{'fontWeight':'400'}}>
-                                Disponible: 
+                                Capacidad: 
                             </Styles.Text>
                             <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%', 'textTransform':'capitalize'}}>
                                 {espacio.disponible}

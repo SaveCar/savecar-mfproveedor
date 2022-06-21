@@ -202,7 +202,6 @@ class Index extends Component {
       ObtenerEspacioByUsuarioAndEstado(this.state.userData.data.idUsuario, 8)
         .then((res) => {
           if(res.data.length > 0){
-            console.log(res.data)
             localStorage.setItem('listaSolicitudesProveedor', JSON.stringify(res.data))
             this.setState({espaciosRegistrados: true})
             this.configureViews()
@@ -253,7 +252,7 @@ class Index extends Component {
   };
   
   handleOnBack = () => {
-      this.unmountApplication("mfbienvenida");
+    this.unmountApplication("mfbienvenida");
   };
 
   handleContinue = () => {
@@ -272,7 +271,7 @@ class Index extends Component {
         return(
           <>
             <WrapperHeader>
-              <Header menu/>
+              <Header menu={this.handleOnBack}/>
             </WrapperHeader>
             <WrapperBody style={{'padding':'0px 16px'}}>
               <Welcome name={this.state.nameUser} onContinue={this.handleContinue}/>
@@ -283,10 +282,10 @@ class Index extends Component {
         return(
           <>
             <WrapperHeader>
-              <Header menu/>
+              <Header menu={this.handleOnBack}/>
             </WrapperHeader>
             <WrapperBody style={{'padding':'0px 16px'}}>
-              <Title>¿Qué deseas hacer?</Title>
+              <Title style={{'marginBottom':'0px'}}>¿Qué deseas hacer?</Title>
               <ListaOpciones 
                 registrar={() => this.handleNew()}
                 espacios={() => this.changeView(ESPACIOS_REGISTRADOS)}
@@ -363,7 +362,7 @@ class Index extends Component {
         return(
           <>
             <WrapperHeader>
-              <Header menu/>
+              <Header/>
             </WrapperHeader>
 
             <WrapperBody>

@@ -3,6 +3,7 @@ import { rem } from "polished";
 import * as singleSpa from "single-spa";
 import img_exito from "./../../icon/exito.png";
 import img_error from "./../../icon/error.png";
+import img_sad from "./../../icon/sad.png";
 
 
 const minWidth1 = rem("600px");
@@ -100,7 +101,7 @@ const Mensaje = ({title, subtitle, text, tipo}) => {
 
   setTimeout(() => {
     onContinue()
-  },2000)
+  },4000)
 
   return (
     <Wrapper>
@@ -108,7 +109,10 @@ const Mensaje = ({title, subtitle, text, tipo}) => {
           tipo === 'exito' ? 
               <Imagen src={img_exito}/>
           : 
-              <Imagen src={img_error}/>
+            tipo === 'ocupado' ?
+              <Imagen src={img_sad}/>
+          : 
+            <Imagen src={img_error}/>
       }
       <Title>
           {title}

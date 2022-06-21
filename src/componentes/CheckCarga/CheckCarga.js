@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { rem } from "polished";
 import { useEffect, useState } from "react";
-import { ActualizarEspacioDisponibleEspacio, ActualizarEstadoSolicitud, GuardarSolicitudReserva, GuardarUsuario } from "../../servicios/servicio";
+import { ActualizarEspacioDisponibleEspacio, ActualizarEstadoSolicitud, GuardarSolicitudReserva, GuardarUsuario, ValidarDisponibilidadByIdEspacioFInicioFTerminoCantidad } from "../../servicios/servicio";
 import Mensaje from "../Mensaje/Mensaje";
 
 
@@ -104,32 +104,6 @@ const CheckCarga = () => {
 
       setTimeout(() => {
         const solicitud = JSON.parse(localStorage.getItem('guardarRespuestaSolicitud'))
-
-        console.log(solicitud)
-        
-          if (solicitud.respuesta === true){
-          ActualizarEstadoSolicitud(solicitud.idSolicitud,solicitud.estado)
-            .then((res) => {
-              if (res.status === 200){
-                //cambiar nro espacio ocupado y disponible
-                ActualizarEspacioDisponibleEspacio(res.data.espacio, res.data.capacidadReserva)
-                  .then((res) => {
-                    if (res.status === 200){
-                      //mostrar mensaje
-                      setRespuesta(true)
-                    }else{
-                      setRespuesta(false)
-                    }
-                  })
-                .catch((e) => {
-                    setRespuesta(false)
-                })
-              }
-            })
-            .catch((e) => {
-              setRespuesta(false)
-          })
-        }
         //rechazar reserva
         if (solicitud.respuesta === false){
           ActualizarEstadoSolicitud(solicitud.idSolicitud, solicitud.estado)
@@ -138,13 +112,53 @@ const CheckCarga = () => {
                 //mostrar mensaje
                 setRespuesta(true)
               }else{
-                setRespuesta(false)
+                setRespuesta('invalido')
               }
             })
             .catch((e) => {
-              setRespuesta(false)
+              setRespuesta('invalido')
           })
         }
+
+        if (solicitud.respuesta === true){
+          //verificar si queda espacio
+          ValidarDisponibilidadByIdEspacioFInicioFTerminoCantidad(solicitud.solicitud.idEspacio, solicitud.solicitud.fechaInicio, solicitud.solicitud.fechaTermino, solicitud.solicitud.cantidad)
+          .then((res) => {
+            if (res.data.respuesta === true){
+              //setear estado
+              ActualizarEstadoSolicitud(solicitud.idSolicitud, solicitud.estado)
+                .then((res) => {
+                  if (res.status === 200){
+                    //mostrar mensaje
+                    setRespuesta(true)
+                  }else{
+                    setRespuesta('invalido')
+                  }
+                })
+                .catch((e) => {
+                  setRespuesta('invalido')
+              })
+            }else{
+              //rechazar la solicitud 
+              ActualizarEstadoSolicitud(solicitud.idSolicitud, 6)
+              .then((res) => {
+                  if (res.status === 200){
+                    //mostrar mensaje
+                    setRespuesta(false)
+                  }else{
+                    setRespuesta('invalido')
+                  }
+                })
+                .catch((e) => {
+                  setRespuesta('invalido')
+              })
+            }
+          })
+          .catch((e) => {
+            setRespuesta('invalido')
+          })
+        }
+        
       }, 2000)
       
     },[])
@@ -157,7 +171,7 @@ const CheckCarga = () => {
                         <Spinner/>
                         <Title/>
                         <SubTitle>
-                            Enviando respuesta
+                            Guardando respuesta
                         </SubTitle>
                         <Text>
                             Puede demorar unos minutos
@@ -166,7 +180,10 @@ const CheckCarga = () => {
 
                 : 
                     respuesta ?
-                        <Mensaje title={'Felicidades'} subtitle={'Respuesta enviada'} text={'Gracias por ayudarnos a descongestionar las calles'} tipo={'exito'} />
+                        <Mensaje title={'Felicidades'} subtitle={'Respuesta registrada'} text={'Gracias por ayudarnos a descongestionar las calles'} tipo={'exito'} />
+                :
+                    !respuesta ?
+                    <Mensaje title={'Lo sentimos'} subtitle={'No quedan espacios disponibles'} text={'Se ha rechazado la solicitud por insuficiente espacio'} tipo={'ocupado'} />
                 :
                     <Mensaje title={'Lo sentimos'} subtitle={'Ocurrió un error'} text={'Vuelve a intentarlo más tarde'} tipo={'error'} />
             }

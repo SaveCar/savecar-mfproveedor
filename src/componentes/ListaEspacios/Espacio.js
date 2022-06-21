@@ -56,15 +56,6 @@ export const Espacio = ({direccion,tipo, capacidad, idEspacio, disponible, tipoC
                                     {capacidad }                
                                 </Styles.Text>
                             </Styles.WrapperInline>
-
-                            <Styles.WrapperInline style={{'justifyContent': 'flex-start', 'marginBottom':'0px'}}>
-                                <Styles.Text style={{'fontWeight':'400'}}>
-                                    Disponible: 
-                                </Styles.Text>
-                                <Styles.Text style={{'fontWeight':'300', 'marginLeft':'2%'}}>
-                                    {disponible }                
-                                </Styles.Text>
-                            </Styles.WrapperInline>
                           
                         </Styles.WrapperDiv>
                     </Styles.WrapperInline>
